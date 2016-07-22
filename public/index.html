@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <style type="text/css">
+  	h1{text-align: center;}
+  	#application{text-align: center;}
+  </style>
+</head>
+<body>
+
+<div class="container">
+	<div id="application">
+		<h1 class="h1" >CHAT</h1>
+		<div id="loginForm">
+			<div class="form-group form-inline">
+				<input type="text" class="form-control" id="nickname">
+				<button class="btn btn-primary" onclick="login()">Login</button>
+				<span id="error" style="display:none"></span>
+				</div>
+		</div>
+
+<div id="chatContainer" style="display:none">
+	<div id='messages'></div>
+
+<div class="form-group form-inline">
+	<input type="text" class="form-control" id="messageText">
+	<button class="btn btn-success" onclick="sendMessage()">Send</button>
+</div>
+	</div>
+</div>
+</div>
+
+<script src='sul.js'></script>
+<script src='app.js'></script>
+<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+
+</body>
+</html>
