@@ -1,13 +1,13 @@
 var socket;
 var nickname;
 function addMessage(nick, msg){
-	SUL('#messages').html(SUL('#messages').html()+nick+':'+msg+"<br>");
+	SUL('#messages').html(SUL('#messages').html()+'<b>'+nick+'</b>'+':'+msg+"<br>");
 }
 
 function login(){
 	if (SUL('#nickname').isEmpty()) {
 SUL('#error').show();
-SUL('#error').html('Your nick');
+SUL('#error').html('Your nick must contain letters!');
 		return;
 	}
 socket = io();
@@ -22,7 +22,10 @@ socket.on('incomingMessage',function (data){
 nickname = SUL('#nickname').val();
 console.log(nickname);
 
-addMessage('System','Chat');
+addMessage('Status','working<hr>');
+
+SUL('#name').hide();
+SUL('#link').hide();
 SUL('#chatContainer').show();
 SUL('#loginForm').hide();
  
