@@ -10,7 +10,20 @@ var io = require('socket.io')(server);
 
 io.on('connection', function(socket){
 	console.log('connected');
+
+	broadcastOnline();
 	socket.on('message', function(data){
 		io.sockets.emit('incomingMessage',data);
+
+	});
+	socket.on('disconnect', function(data){
+		broadcastOnline();
 	})
 });
+
+var getClientsCount = function() {
+    return io.engine.clientsCount;
+};
+function broadcastOnline() {
+    io.sockets.emit("online", getClientsCount());
+};

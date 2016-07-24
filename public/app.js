@@ -1,5 +1,6 @@
 var socket;
 var nickname;
+var sound;
 function addMessage(nick, msg){
 	SUL('#messages').html(SUL('#messages').html()+'<b>'+nick+'</b>'+':'+msg+"<br>");
 }
@@ -17,7 +18,15 @@ socket.on('connect', function(data){
 
 socket.on('incomingMessage',function (data){
 	addMessage(data.nickname, data.msg);
-})
+	sound.play();
+
+//online status
+});
+
+socket.on("online", function (data) {
+        console.log("[Socket] Online changed = "+data);
+        SUL("#playersOnline").html(data);
+    });
 
 nickname = SUL('#nickname').val();
 console.log(nickname);
@@ -31,10 +40,36 @@ SUL('#loginForm').hide();
  
  }
 
+function entermsg(e) {
+
+ if (e.ctrlKey && e.keyCode == 13) {
+  
+    sendMessage();
+  }
+ }
+
+
 function sendMessage(){
+	//window.addEventListener("keydown", entermsg, false );
+
+	
+
 	if(SUL('#messageText').isEmpty()){
 		return;
 	}
+
 	socket.emit('message', {msg: SUL('#messageText').val(), nickname: nickname});
+
 	SUL('#messageText').clear();
 }
+
+ SUL("window").on("beforeunload", function() { 
+        socket.disconnect();
+    });
+
+
+SUL("#messageText").on('keydown', entermsg);
+
+
+sound = new Audio("./sound.wav");
+    sound.autoplay = false;

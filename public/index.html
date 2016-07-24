@@ -2,12 +2,14 @@
 <html>
 <head>
   <title></title>
+  <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <meta name="description" content="ChatLab - real-time chat">
     <meta name ="keywords" content="chatlab, chatlab.herokuapp.com">
   <style type="text/css">
   	h1{text-align: center;}
+    textarea{ resize: none;}
   	b{color: red};
   	#application{text-align: center;}
   	 html { overflow-x: hidden; }
@@ -74,7 +76,8 @@
 		</div>
 
 <div id="chatContainer" style="display:none">
-<!--add number of users connected-->
+
+ <strong>Players online: </strong><span id="playersOnline">N/A</span>
 
 	<div id='messages'></div>
 
@@ -96,6 +99,6 @@
 </span>
 <script src='sul.js'></script>
 <script src='app.js'></script>
-<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+
 </body>
 </html>
