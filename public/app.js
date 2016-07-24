@@ -1,8 +1,23 @@
 var socket;
+
 var nickname;
 var sound;
-function addMessage(nick, msg){
-	SUL('#messages').html(SUL('#messages').html()+'<b>'+nick+'</b>'+':'+msg+"<br>");
+function addMessage(nick, msg, sender){
+
+	var temp = document.createElement('div');
+	if (sender) {
+		temp.className = 'from-me';
+	}else{
+		temp.className = 'from-them';
+	}
+	temp.innerHTML = '<b>'+nick+':'+'</b>'+msg+"<br>";
+
+	SUL('#messages').append(temp);
+	SUL('#messages').append("<br>");
+	SUL('#messages').append("<br>");
+	SUL('#messages').append("<br>");
+	
+
 }
 
 function login(){
@@ -17,7 +32,8 @@ socket.on('connect', function(data){
 });
 
 socket.on('incomingMessage',function (data){
-	addMessage(data.nickname, data.msg);
+
+	addMessage(data.nickname, data.msg, (data.nickname==nickname));
 	sound.play();
 
 //online status
@@ -25,13 +41,12 @@ socket.on('incomingMessage',function (data){
 
 socket.on("online", function (data) {
         console.log("[Socket] Online changed = "+data);
-        SUL("#playersOnline").html(data);
+ 	SUL('#playersOnline').html(data);
     });
 
 nickname = SUL('#nickname').val();
 console.log(nickname);
 
-addMessage('Status','working<hr>');
 
 SUL('#name').hide();
 SUL('#link').hide();

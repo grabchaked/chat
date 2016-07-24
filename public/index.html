@@ -3,16 +3,22 @@
 <head>
   <title></title>
   <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <meta name="description" content="ChatLab - real-time chat">
     <meta name ="keywords" content="chatlab, chatlab.herokuapp.com">
   <style type="text/css">
+
   	h1{text-align: center;}
+
+    #status{ top: 20px; left: 20px; position: fixed;}
     textarea{ resize: none;}
-  	b{color: red};
+     b{color: black; font-size: 15px; }
   	#application{text-align: center;}
   	 html { overflow-x: hidden; }
+
+
   	 #footer {
     position: fixed; 
     left: 0; bottom: 0; 
@@ -65,6 +71,7 @@
 <div class="container">
 	<div id="application">
 		<h1 class="h1" >CHAT LAB</h1>
+    <br>
 		<center>
 		<p id="name">Please write your name:</p>
 		<div id="loginForm">
@@ -76,10 +83,13 @@
 		</div>
 
 <div id="chatContainer" style="display:none">
+<div id="status">
+ <strong>Users online: </strong><span id="playersOnline">N/A</span>
+</div>
 
- <strong>Players online: </strong><span id="playersOnline">N/A</span>
+	<div id='messages'>
 
-	<div id='messages'></div>
+  </div>
 
  <form role="form">
     <div class="form-group">
