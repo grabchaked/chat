@@ -20,6 +20,11 @@ function addMessage(nick, msg, sender){
 
 }
 
+function attachImage() {
+  var link = prompt("Enter image link: ");
+  SUL("#messageText").val( SUL("#messageText").val()+'<img src="'+link+'"  class="attachImg">');
+}
+
 function login(){
 	if (SUL('#nickname').isEmpty()) {
 SUL('#error').show();
