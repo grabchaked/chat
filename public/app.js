@@ -88,7 +88,7 @@ function sendMessage(){
 	
 	prevMsg = newMsg.toLowerCase();
 
-	socket.emit('message', {msg: newmsg, nickname: nickname});
+	socket.emit('message', {msg: newMsg, nickname: nickname});
 
 	SUL('#messageText').clear();
 }
