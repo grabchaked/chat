@@ -63,6 +63,8 @@ function login() {
     SUL('#chatContainer').show();
     SUL('#loginForm').hide();
 
+    socket.emit("join", nickname);
+
 }
 
 function entermsg(e) {
@@ -81,6 +83,12 @@ function sendMessage() {
     }
 
     var newMsg = SUL('#messageText').val();
+
+	if (newMsg.length > 256) {
+		addMessage("Server", "How did you avoid HTML max-length attribute, scriptkiddy?", false);
+		return;
+	}
+
     if (newMsg.toLowerCase() == prevMsg) {
         addMessage("Server", "Do not repeat the same message!", false);
         return;
@@ -95,6 +103,7 @@ function sendMessage() {
 }
 
 SUL("window").on("beforeunload", function() {
+	socket.emit("leave", nickname);
     socket.disconnect();
 });
 

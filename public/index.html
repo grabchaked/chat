@@ -86,7 +86,7 @@
     #messages {
       overflow-y: auto;
       overflow-x: hidden;
-      max-height: 400px;
+      max-height: 350px;
     }
 </style>
 
@@ -108,15 +108,15 @@
 
 <div id="chatContainer" style="display:none">
 
-	<div id='messages'>
+  	<div id='messages'>
 
-  </div>
+    </div>
 
  <form role="form">
     <div class="form-group">
     <br>
       <label for="comment">Type your message here:</label>
-      <textarea class="form-control" rows="3" id="messageText" placeholder="Start typing your message"></textarea>
+      <textarea class="form-control" rows="3" id="messageText" placeholder="Start typing your message" maxlength="256"></textarea>
     </div>
   </form>
 
