@@ -4,6 +4,8 @@ var app = express();
 var users = {};
 var usersWriting = 0;
 
+
+
 var Commands = {
 	commands: {},
 	isCommand: function(str) {
@@ -20,10 +22,10 @@ var Commands = {
 	init: function() {
 		this.commands["ping"] = this.pingHandler;
 		this.commands["online"] = this.onlineHandler;
-		this.commands["votekick"] = this.votekickHandler;
+		this.commands["rollthedice"] = this.rollthediceHandler;
 	},
 	pingHandler: function() {
-		return "Pong!";
+		return {global: false, msg: "Pong!"};
 	},
 	onlineHandler: function() {
 		var result = '<br><ul> Users online: <br>';
@@ -32,10 +34,10 @@ var Commands = {
 		}
 		result += "</ul>";
 
-		return result;
+		return {global: false, msg:result};
 	},
-	votekickHandler: function() {
-
+	rollthediceHandler: function() {
+		return {global: true, msg: "Rolled the Dice: "+randomInt(1,100)};
 	}
 }
 
@@ -57,7 +59,14 @@ io.on('connection', function(socket){
 	broadcastOnline();
 	socket.on('message', function(data){
 		if (Commands.isCommand(data.msg)) {
-			socket.emit('incomingMessage', {nickname: "Server", msg: Commands.processCommand(data.msg)});
+			var cmdResult = Commands.processCommand(data.msg);
+
+			if (cmdResult.global) {
+				io.sockets.emit('incomingMessage', {nickname: "Server", msg: cmdResult.msg});
+			} else {
+				socket.emit('incomingMessage', {nickname: "Server", msg: cmdResult.msg});
+			}
+			
 		} else {
 			io.sockets.emit('incomingMessage',data);
 		}
@@ -96,4 +105,8 @@ function broadcastOnline() {
 
 function broadcastWriters() {
 	io.sockets.emit("writers", usersWriting);
+}
+
+function randomInt(min,max) {
+	return Math.floor(Math.random() * max) + min;
 }
