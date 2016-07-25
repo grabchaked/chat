@@ -1,74 +1,95 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title></title>
-  <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+  <title>ChatLab</title>
   <link rel="stylesheet" type="text/css" href="style.css">
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <meta name="description" content="ChatLab - real-time chat">
     <meta name ="keywords" content="chatlab, chatlab.herokuapp.com">
-  <style type="text/css">
+ <style type="text/css">
+    h1 {
+        text-align: center;
+        font-family: fantasy;
+    }
 
-  	h1{text-align: center; font-family: fantasy;}
-    
-    textarea{ resize: none;}
-     em{color: black; font-size: 15px;}
-  	#application{text-align: center;}
-  	 html { overflow-x: hidden; }
+    textarea {
+        resize: none;
+    }
 
+    em {
+        color: black;
+        font-size: 15px;
+    }
 
-  	 #footer {
-    position: fixed; 
-    left: 0; bottom: 0; 
-    padding: 5px;  
-    color: #fff; 
-    width: 100%; 
-   }
-   .button {
-  border-radius: 4px;
-  background-color: green;
-  border: none;
-  color: #FFFFFF;
-  text-align: center;
-  font-size: 25px;
-  padding: 10px;
-  width: 100px;
-  transition: all 0.5s;
-  cursor: pointer;
-  margin: 5px;
-}
+    #application {
+        text-align: center;
+    }
 
-.button span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.3s;
-}
+    html {
+        overflow-x: hidden;
+    }
 
-.button span:after {
-  content: '»';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -20px;
-  transition: 0.3s;
-}
+    #footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        padding: 5px;
+        color: #fff;
+        width: 100%;
+    }
 
-.button:hover span {
-  padding-right: 25px;
-}
+    .button {
+        border-radius: 4px;
+        background-color: green;
+        border: none;
+        color: #FFFFFF;
+        text-align: center;
+        font-size: 25px;
+        padding: 10px;
+        width: 100px;
+        transition: all 0.5s;
+        cursor: pointer;
+        margin: 5px;
+    }
 
-.button:hover span:after {
-  opacity: 1;
-  right: 0;
-}
+    .button span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.3s;
+    }
 
-  .attachImg {
-    width: 300px;
-    height: 300px;
-  }
-  </style>
+    .button span:after {
+        content: '»';
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        right: -20px;
+        transition: 0.3s;
+    }
+
+    .button:hover span {
+        padding-right: 25px;
+    }
+
+    .button:hover span:after {
+        opacity: 1;
+        right: 0;
+    }
+
+    .attachImg {
+        width: 300px;
+        height: 300px;
+    }
+
+    #messages {
+      overflow-y: auto;
+      overflow-x: hidden;
+      max-height: 400px;
+    }
+</style>
+
 </head>
 <body>
 
@@ -110,6 +131,9 @@
 <span id="link">
 <p align="center" id="footer"><a href='http://edgrlab.github.io'>edgrlab.github.io</a></p>
 </span>
+
+
+<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 <script src='sul.js'></script>
 <script src='app.js'></script>
 
