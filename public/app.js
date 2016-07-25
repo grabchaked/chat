@@ -85,6 +85,7 @@ function sendMessage() {
         addMessage("Server", "Do not repeat the same message!", false);
         return;
     }
+    newMsg = newMsg.replace(/(?:(https?\:\/\/[^\s]+))/m,'<a href="$1">$1</a>'); 
 
     prevMsg = newMsg.toLowerCase();
 
