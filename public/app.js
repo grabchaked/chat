@@ -54,6 +54,15 @@ function login() {
         SUL("#messages").append('<b>Users online: </b>' + data + '<br>');
     });
 
+    socket.on("writers", function(data) {
+    	if (data == 0) {
+    		SUL("#writersStatus").getNative().style.visibility = "hidden";
+    	} else {
+    		SUL("#writersStatus").getNative().style.visibility = "visible";
+    		SUL("#writersCount").html(data);
+    	}
+    });
+
     nickname = SUL('#nickname').val().toUpperCase();
     console.log(nickname);
 
@@ -63,6 +72,13 @@ function login() {
     SUL('#chatContainer').show();
     SUL('#loginForm').hide();
 
+    SUL("#messageText").on("focus", function(e) {
+    	socket.emit("startedWriting", {});
+    });
+
+    SUL("#messageText").on("blur", function(e) {
+    	socket.emit("stoppedWriting", {});
+    });
     socket.emit("join", nickname);
 
 }

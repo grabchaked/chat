@@ -1,26 +1,114 @@
-
 body {
-	font-family: "Arial";
-	font-size: 20px;
-	font-weight: normal;
+    font-family: "Arial";
+    font-size: 20px;
+    font-weight: normal;
 }
 
 .from-me {
-  padding: 8px 15px;
-  color: white;
-  background: #0B93F6;
-  border-radius: 25px;
-  float: right;
-  clear: both;
-  margin-top: 5px;
+    padding: 8px 15px;
+    color: white;
+    background: #0B93F6;
+    border-radius: 25px;
+    float: right;
+    clear: both;
+    margin-top: 5px;
 }
 
 .from-them {
-  padding: 8px 15px;
-  background: #E5E5EA;
-  border-radius: 25px;
-  color: black;
+    padding: 8px 15px;
+    background: #E5E5EA;
+    border-radius: 25px;
+    color: black;
+    float: left;
+    clear: both;
+    margin-top: 5px;
+}
+
+h1 {
+    text-align: center;
+    font-family: fantasy;
+}
+
+textarea {
+    resize: none;
+}
+
+em {
+    color: black;
+    font-size: 15px;
+}
+
+#application {
+    text-align: center;
+}
+
+html {
+    overflow-x: hidden;
+}
+
+#footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    padding: 5px;
+    color: #fff;
+    width: 100%;
+}
+
+.button {
+    border-radius: 4px;
+    background-color: green;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 25px;
+    padding: 10px;
+    width: 100px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.3s;
+}
+
+.button span:after {
+    content: '»';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.3s;
+}
+
+.button:hover span {
+    padding-right: 25px;
+}
+
+.button:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+.attachImg {
+    width: 300px;
+    height: 300px;
+}
+
+#messages {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 350px;
+}
+
+#writersStatus {
   float: left;
-  clear:both;
   margin-top: 5px;
+  margin-left: 10px;
+  max-width: 260px;
+  position: absolute;
 }

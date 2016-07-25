@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 
 var users = {};
+var usersWriting = 0;
 
 var Commands = {
 	commands: {},
@@ -19,6 +20,7 @@ var Commands = {
 	init: function() {
 		this.commands["ping"] = this.pingHandler;
 		this.commands["online"] = this.onlineHandler;
+		this.commands["votekick"] = this.votekickHandler;
 	},
 	pingHandler: function() {
 		return "Pong!";
@@ -31,6 +33,9 @@ var Commands = {
 		result += "</ul>";
 
 		return result;
+	},
+	votekickHandler: function() {
+
 	}
 }
 
@@ -64,11 +69,21 @@ io.on('connection', function(socket){
 
 	socket.on("leave", function(data) {
 		users[data] = null;
-	})
+	});
+
+	socket.on("startedWriting", function(data) {
+		usersWriting++;
+		broadcastWriters();
+	});
+
+	socket.on("stoppedWriting", function(data) {
+		usersWriting--;
+		broadcastWriters();
+	});
 
 	socket.on('disconnect', function(data){
 		broadcastOnline();
-	})
+	});
 });
 
 
@@ -78,3 +93,7 @@ var getClientsCount = function() {
 function broadcastOnline() {
     io.sockets.emit("online", getClientsCount());
 };
+
+function broadcastWriters() {
+	io.sockets.emit("writers", usersWriting);
+}

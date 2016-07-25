@@ -1,141 +1,53 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>ChatLab</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
-  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-   <meta name="viewport" content="width=device-width, initial-scale=1">
-   <meta name="description" content="ChatLab - real-time chat">
-    <meta name ="keywords" content="chatlab, chatlab.herokuapp.com">
- <style type="text/css">
-    h1 {
-        text-align: center;
-        font-family: fantasy;
-    }
-
-    textarea {
-        resize: none;
-    }
-
-    em {
-        color: black;
-        font-size: 15px;
-    }
-
-    #application {
-        text-align: center;
-    }
-
-    html {
-        overflow-x: hidden;
-    }
-
-    #footer {
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        padding: 5px;
-        color: #fff;
-        width: 100%;
-    }
-
-    .button {
-        border-radius: 4px;
-        background-color: green;
-        border: none;
-        color: #FFFFFF;
-        text-align: center;
-        font-size: 25px;
-        padding: 10px;
-        width: 100px;
-        transition: all 0.5s;
-        cursor: pointer;
-        margin: 5px;
-    }
-
-    .button span {
-        cursor: pointer;
-        display: inline-block;
-        position: relative;
-        transition: 0.3s;
-    }
-
-    .button span:after {
-        content: '»';
-        position: absolute;
-        opacity: 0;
-        top: 0;
-        right: -20px;
-        transition: 0.3s;
-    }
-
-    .button:hover span {
-        padding-right: 25px;
-    }
-
-    .button:hover span:after {
-        opacity: 1;
-        right: 0;
-    }
-
-    .attachImg {
-        width: 300px;
-        height: 300px;
-    }
-
-    #messages {
-      overflow-y: auto;
-      overflow-x: hidden;
-      max-height: 350px;
-    }
-</style>
-
+    <title>ChatLab</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="ChatLab - real-time chat">
+    <meta name="keywords" content="chatlab, chatlab.herokuapp.com">
 </head>
+
 <body>
-
-<div class="container">
-	<div id="application">
-		<h1>CHAT LAB</h1>
-		<center>
-		<p id="name">Please write your name:</p>
-		<div id="loginForm">
-			<div class="form-group form-inline">
-				<input type="text" class="form-control" id="nickname">
-				<button class="btn btn-primary" onclick="login()">Login</button>
-				<span id="error" style="display:none"></span>
-				</div>
-		</div>
-
-<div id="chatContainer" style="display:none">
-
-  	<div id='messages'>
-
+    <div class="container">
+        <div id="application">
+            <h1>CHAT LAB</h1>
+            <center>
+                <p id="name">Please write your name:</p>
+                <div id="loginForm">
+                    <div class="form-group form-inline">
+                        <input type="text" class="form-control" id="nickname">
+                        <button class="btn btn-primary" onclick="login()">Login</button>
+                        <span id="error" style="display:none"></span>
+                    </div>
+                </div>
+                <div id="chatContainer" style="display:none">
+                    <div id='messages'>
+                    </div>
+                    <form role="form">
+                        <div class="form-group">
+                            <br>
+                            <label for="comment">Type your message here:</label>
+                            <textarea class="form-control" rows="3" id="messageText" placeholder="Start typing your message" maxlength="256"></textarea>
+                        </div>
+                    </form>
+                    <div id="writersStatus"><span id="writersCount">1</span> users are typing message now...</div>
+                    <button class="button" onclick="sendMessage()"><span>Send </span></button>
+                    <button type="button" class="btn btn-default btn-sm" onclick="attachImage();">
+                        <span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>Image
+                    </button>
+                </div>
+        </div>
+        </center>
     </div>
-
- <form role="form">
-    <div class="form-group">
-    <br>
-      <label for="comment">Type your message here:</label>
-      <textarea class="form-control" rows="3" id="messageText" placeholder="Start typing your message" maxlength="256"></textarea>
-    </div>
-  </form>
-
-	<button class="button" onclick="sendMessage()"><span>Send </span></button>
-	 <button type="button" class="btn btn-default btn-sm" onclick="attachImage();">
-  <span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>Image
-</button>
-	</div>
-</div>
-</center>
-</div>
-<span id="link">
+    <span id="link">
 <p align="center" id="footer"><a href='http://edgrlab.github.io'>edgrlab.github.io</a></p>
 </span>
-
-
-<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
-<script src='sul.js'></script>
-<script src='app.js'></script>
-
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+    <script src='sul.js'></script>
+    <script src='app.js'></script>
 </body>
+
 </html>
