@@ -180,11 +180,9 @@
 		var found = false;
 
 		this.each(function(e) {
-			if (e.tagName == "INPUT") {
-				if (e.value === "" || e.value === null) {
+		 if (e.value === "" || e.value === null) {
 					found = true;
 					return;
-				}
 			}
 		});
 
