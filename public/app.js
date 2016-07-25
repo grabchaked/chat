@@ -10,7 +10,7 @@ function addMessage(nick, msg, sender){
 	}else{
 		temp.className = 'from-them';
 	}
-	temp.innerHTML = '<b>'+nick+':'+'</b>'+msg+"<br>";
+	temp.innerHTML = '<em>'+nick+':'+'</em>'+msg+"<br>";
 
 	SUL('#messages').append(temp);
 	SUL('#messages').append("<br>");
@@ -41,7 +41,8 @@ socket.on('incomingMessage',function (data){
 
 socket.on("online", function (data) {
         console.log("[Socket] Online changed = "+data);
- 	SUL('#playersOnline').html(data);
+       
+        SUL("#messages").append('<b>Users online: </b>'+data+'<br>');
     });
 
 nickname = SUL('#nickname').val();
