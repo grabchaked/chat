@@ -1,6 +1,7 @@
 var socket;
 
 var nickname;
+var prevMsg = "";
 var sound;
 function addMessage(nick, msg, sender){
 
@@ -78,8 +79,16 @@ function sendMessage(){
 	if(SUL('#messageText').isEmpty()){
 		return;
 	}
+	
+	var newMsg = SUL('#messageText').val();
+	if (newMsg.toLowerCase() == prevMsg) {
+	  addMessage("Server", "Do not repeat the same message!", false);
+	  return;
+	}
+	
+	prevMsg = newMsg.toLowerCase();
 
-	socket.emit('message', {msg: SUL('#messageText').val(), nickname: nickname});
+	socket.emit('message', {msg: newmsg, nickname: nickname});
 
 	SUL('#messageText').clear();
 }
