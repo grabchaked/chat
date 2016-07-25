@@ -45,7 +45,7 @@ socket.on("online", function (data) {
         SUL("#messages").append('<b>Users online: </b>'+data+'<br>');
     });
 
-nickname = SUL('#nickname').val().toLowerCase();
+nickname = SUL('#nickname').val().toUpperCase();
 console.log(nickname);
 
 
