@@ -24,7 +24,7 @@ var Commands = {
 		return "Pong!";
 	},
 	onlineHandler: function() {
-		var result = '<br> Users online: <br>';
+		var result = '<br><ul> Users online: <br>';
 		for (var key in users) {
 			result += "<li>"+key+"</li>";
 		}
