@@ -17,7 +17,7 @@ function addMessage(nick, msg, sender) {
     SUL('#messages').append(temp);
     SUL('#messages').append("<br>");
     SUL('#messages').append("<br>");
-    SUL('#messages').append("<br>");
+    SUL('#messages').append("<br>"); 
 
 
     //Auto-scroll DIV when adding content

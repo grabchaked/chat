@@ -48,7 +48,7 @@ app.use(express.static(__dirname+'/public'));
 var server = app.listen(process.env.PORT || 3000, function () {
   console.log('Example app listening on port 3000!');
 });
-
+ 
 var io = require('socket.io')(server);
 
 
@@ -68,6 +68,7 @@ io.on('connection', function(socket){
 			}
 			
 		} else {
+
 			io.sockets.emit('incomingMessage',data);
 		}
 	});
