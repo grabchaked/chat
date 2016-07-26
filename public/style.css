@@ -111,3 +111,13 @@ html {
   margin-left: 10px;
   max-width: 260px;
 }
+
+#attachmentsContainer {
+    float: left;
+    margin-top: 5px;
+    margin-left: 10px;
+    max-width: 260px;
+    visibility: hidden;
+    text-align: left;
+    position: absolute;
+}

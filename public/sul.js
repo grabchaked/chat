@@ -81,6 +81,20 @@
 		return this;
 	};
 
+	SUL_Object.prototype.visibility = function(arg) {
+		var toSet;
+		if (arg) {
+			toSet = "visible";
+		} else {
+			toSet = "hidden";
+		}
+
+		this.each(function(e) {
+			e.style.visibility = toSet;
+		});
+		return this;
+	};
+
 
 	SUL_Object.prototype.hide = function() {
 		this.each(function(e) {
@@ -162,6 +176,18 @@
 		return this;
 	};
 
+	SUL_Object.prototype.css = function(key, value) {
+		if (value) {
+			this.each(function(e) {
+				e.style[key] = value;
+			});
+		} else {
+			return this.native[0].style[key];
+		}
+
+		return this;
+	};
+
 	SUL_Object.prototype.append = function(content) {
 		this.each(function(e) {
 			if (typeof(content) === "string") {
@@ -180,9 +206,11 @@
 		var found = false;
 
 		this.each(function(e) {
-		 if (e.value === "" || e.value === null) {
+			if (e.tagName == "INPUT") {
+				if (e.value === "" || e.value === null) {
 					found = true;
 					return;
+				}
 			}
 		});
 
