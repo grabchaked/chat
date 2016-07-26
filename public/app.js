@@ -90,7 +90,7 @@ function entermsg(e) {
         sendMessage();
     }
 }
-
+ 
 
 function sendMessage() {
 
