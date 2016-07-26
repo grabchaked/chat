@@ -4,7 +4,10 @@ var nickname;
 var prevMsg = "";
 var sound;
 
-function addMessage(nick, msg, sender) {
+//So this will contain all links to image attachments
+var attachments = []; 
+
+function addMessage(nick, msg, sender, attaches) {
 
     var temp = document.createElement('div');
     if (sender) {
@@ -15,9 +18,12 @@ function addMessage(nick, msg, sender) {
     temp.innerHTML = '<em>' + nick + ':' + '</em>' + msg + "<br>";
 
     SUL('#messages').append(temp);
+    for (var i=0;i<attaches.length; i++) {
+        temp.innerHTML += "<img src=\""+attaches+"\" width=\"200px\" height=\"200px\">";
+    }
     SUL('#messages').append("<br>");
     SUL('#messages').append("<br>");
-    SUL('#messages').append("<br>"); 
+    SUL('#messages').append("<br>");
 
 
     //Auto-scroll DIV when adding content
@@ -26,8 +32,27 @@ function addMessage(nick, msg, sender) {
 
 function attachImage() {
     var link = prompt("Enter image link: ");
-    SUL("#messageText").val(SUL("#messageText").val() + '<img src="' + link + '"  class="attachImg">');
+    attachments.push(link);
+
+    renderAttachments();
 }
+
+
+//This function will show all attachments in list
+function renderAttachments() {
+    if (attachments.length == 0) {
+       SUL("#attachmentsContainer").visibility(false);
+       return; 
+    }
+    SUL("#attachmentsContainer").visibility(true);
+    SUL("#attachmentsList").html("");
+    for (var i = 0; i<attachments.length; i++) {
+        var toAdd = document.createElement("li");
+        toAdd.innerHTML = attachments[i].substring(0,32)+"...";
+        SUL("#attachmentsList").append(toAdd);
+    }
+}
+
 
 function login() {
     if (SUL('#nickname').isEmpty()) {
@@ -42,7 +67,7 @@ function login() {
 
     socket.on('incomingMessage', function(data) {
 
-        addMessage(data.nickname, data.msg, (data.nickname == nickname));
+        addMessage(data.nickname, data.msg, (data.nickname == nickname), data.attachments);
         sound.play();
 
         //online status
@@ -72,13 +97,6 @@ function login() {
     SUL('#chatContainer').show();
     SUL('#loginForm').hide();
 
-    /*SUL("#messageText").on("focus", function(e) {
-    	socket.emit("startedWriting", {});
-    });
-
-    SUL("#messageText").on("blur", function(e) {
-    	socket.emit("stoppedWriting", {});
-    });*/
     //socket.emit("join", nickname);
 
 }
@@ -90,7 +108,7 @@ function entermsg(e) {
         sendMessage();
     }
 }
- 
+
 
 function sendMessage() {
 
@@ -113,9 +131,11 @@ function sendMessage() {
 
     prevMsg = newMsg.toLowerCase();
 
-    socket.emit('message', { msg: newMsg, nickname: nickname });
+    socket.emit('message', { msg: newMsg, nickname: nickname, attachments: attachments});
 
     SUL('#messageText').clear();
+    attachments = [];
+    renderAttachments();
 }
 
 SUL("window").on("beforeunload", function() {
