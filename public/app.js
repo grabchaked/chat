@@ -72,14 +72,14 @@ function login() {
     SUL('#chatContainer').show();
     SUL('#loginForm').hide();
 
-    SUL("#messageText").on("focus", function(e) {
+    /*SUL("#messageText").on("focus", function(e) {
     	socket.emit("startedWriting", {});
     });
 
     SUL("#messageText").on("blur", function(e) {
     	socket.emit("stoppedWriting", {});
-    });
-    socket.emit("join", nickname);
+    });*/
+    //socket.emit("join", nickname);
 
 }
 
