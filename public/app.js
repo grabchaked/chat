@@ -18,9 +18,12 @@ function addMessage(nick, msg, sender, attaches) {
     temp.innerHTML = '<em>' + nick + ':' + '</em>' + msg + "<br>";
 
     SUL('#messages').append(temp);
-    for (var i=0;i<attaches.length; i++) {
-        temp.innerHTML += "<img src=\""+attaches+"\" width=\"200px\" height=\"200px\">";
+    if (attaches) {
+        for (var i=0;i<attaches.length; i++) {
+            temp.innerHTML += "<img src=\""+attaches+"\" width=\"200px\" height=\"200px\">";
+        }
     }
+
     SUL('#messages').append("<br>");
     SUL('#messages').append("<br>");
     SUL('#messages').append("<br>");
@@ -77,6 +80,10 @@ function login() {
         console.log("[Socket] Online changed = " + data);
 
         SUL("#messages").append('<b>Users online: </b>' + data + '<br>');
+    });
+
+    socket.on("askOnline", function(data) {
+        socket.emit("askResponse", nickname);
     });
 
     socket.on("writers", function(data) {

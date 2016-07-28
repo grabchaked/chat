@@ -1,8 +1,30 @@
 var express = require('express');
 var app = express();
 
-var users = {};
+var users = [];
 var usersWriting = 0;
+
+
+var getClientsCount = function() {
+    return io.engine.clientsCount;
+};
+
+function broadcastOnline() {
+    io.sockets.emit("online", getClientsCount());
+};
+
+function broadcastWriters() {
+    io.sockets.emit("writers", usersWriting);
+}
+
+function askClients() {
+    users = [];
+    io.sockets.emit("askOnline", {});    
+}
+
+function randomInt(min, max) {
+    return Math.floor(Math.random() * max) + min;
+}
 
 
 
@@ -29,8 +51,8 @@ var Commands = {
     },
     onlineHandler: function() {
         var result = '<br><ul> Users online: <br>';
-        for (var key in users) {
-            result += "<li>" + key + "</li>";
+        for (var i=0; i<users.length;i++) {
+            result += "<li>" + users[i] + "</li>";
         }
         result += "</ul>";
 
@@ -71,12 +93,8 @@ io.on('connection', function(socket) {
         }
     });
 
-    socket.on("join", function(data) {
-        users[data] = socket.id;
-    });
-
-    socket.on("leave", function(data) {
-        users[data] = null;
+    socket.on("askResponse", function(data) {
+        users.push(data);
     });
 
     socket.on("startedWriting", function(data) {
@@ -95,18 +113,4 @@ io.on('connection', function(socket) {
 });
 
 
-var getClientsCount = function() {
-    return io.engine.clientsCount;
-};
-
-function broadcastOnline() {
-    io.sockets.emit("online", getClientsCount());
-};
-
-function broadcastWriters() {
-    io.sockets.emit("writers", usersWriting);
-}
-
-function randomInt(min, max) {
-    return Math.floor(Math.random() * max) + min;
-}
+setInterval(askClients, 1000*10);
